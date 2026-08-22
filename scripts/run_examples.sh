@@ -8,7 +8,7 @@ LOG="$LOG_DIR/run.log"
 mkdir -p "$LOG_DIR"
 
 PREFIX="${BRPC_ROOT:-/tmp/brpc_local/usr}"
-export LD_LIBRARY_PATH="${PREFIX}/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH}"
+export LD_LIBRARY_PATH="${PREFIX}/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH:-}"
 
 echo "" >> "$LOG"
 echo "========== $(date '+%Y-%m-%d %H:%M:%S') run_examples ==========" >> "$LOG"
