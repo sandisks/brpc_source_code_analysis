@@ -43,12 +43,24 @@ set(PROTO_DIR ${CMAKE_CURRENT_SOURCE_DIR}/examples/proto)
 set(GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/generated)
 file(MAKE_DIRECTORY ${GEN_DIR})
 
+# protoc 运行时：若来自自定义前缀（如 /tmp/brpc_local），需带上其动态库目录，
+# 否则在 CLion / 无 LD_LIBRARY_PATH 的环境里会报 libprotoc.so.32 找不到
+set(PROTOC_RUNTIME_DIR "${BRPC_ROOT}/lib/x86_64-linux-gnu")
+if(EXISTS "${PROTOC_RUNTIME_DIR}/libprotoc.so")
+    set(PROTOC_CMD
+        ${CMAKE_COMMAND} -E env
+        "LD_LIBRARY_PATH=${PROTOC_RUNTIME_DIR}:$ENV{LD_LIBRARY_PATH}"
+        ${Protobuf_PROTOC_EXECUTABLE})
+else()
+    set(PROTOC_CMD ${Protobuf_PROTOC_EXECUTABLE})
+endif()
+
 set(PROTO_TARGETS "")
 foreach(p echo kv)
     set(PROTO_FILE ${PROTO_DIR}/${p}.proto)
     add_custom_command(
         OUTPUT ${GEN_DIR}/${p}.pb.cc ${GEN_DIR}/${p}.pb.h
-        COMMAND ${Protobuf_PROTOC_EXECUTABLE}
+        COMMAND ${PROTOC_CMD}
             --cpp_out=${GEN_DIR}
             -I${PROTO_DIR}
             ${PROTO_FILE}
