@@ -55,5 +55,12 @@ sleep 2
 run load_balancing --target="list://127.0.0.1:8000,127.0.0.1:8006" --count=8
 kill "$SERVER3_PID" 2>/dev/null
 
+# kv_server + kv_client：leveldb 作为存储引擎（8004）
+"$BUILD/kv_server" --port=8004 --db=/tmp/brpc_kv_demo >/dev/null 2>&1 &
+KV_PID=$!
+sleep 2
+run kv_client --target="127.0.0.1:8004"
+kill "$KV_PID" 2>/dev/null
+
 kill "$SERVER_PID" 2>/dev/null
 echo "[run] all done. log=$LOG" | tee -a "$LOG"

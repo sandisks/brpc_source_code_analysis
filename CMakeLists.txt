@@ -37,27 +37,31 @@ message(STATUS "BRPC_LIBRARY     = ${BRPC_LIBRARY}")
 message(STATUS "PROTOC           = ${Protobuf_PROTOC_EXECUTABLE}")
 
 # ---------------------------------------------------------------------------
-# 2. 用 protoc 生成公共 proto（examples/proto/echo.proto）
+# 2. 用 protoc 生成公共 proto（examples/proto/ 下的所有 .proto）
 # ---------------------------------------------------------------------------
 set(PROTO_DIR ${CMAKE_CURRENT_SOURCE_DIR}/examples/proto)
-set(PROTO_FILE ${PROTO_DIR}/echo.proto)
 set(GEN_DIR ${CMAKE_CURRENT_BINARY_DIR}/generated)
 file(MAKE_DIRECTORY ${GEN_DIR})
 
-add_custom_command(
-    OUTPUT ${GEN_DIR}/echo.pb.cc ${GEN_DIR}/echo.pb.h
-    COMMAND ${Protobuf_PROTOC_EXECUTABLE}
-        --cpp_out=${GEN_DIR}
-        -I${PROTO_DIR}
-        ${PROTO_FILE}
-    DEPENDS ${PROTO_FILE}
-    COMMENT "Generating C++ from echo.proto"
-)
-add_library(echo_proto STATIC ${GEN_DIR}/echo.pb.cc)
-target_include_directories(echo_proto PUBLIC
-    ${GEN_DIR}
-    ${Protobuf_INCLUDE_DIRS})
-target_link_libraries(echo_proto PUBLIC ${Protobuf_LIBRARIES})
+set(PROTO_TARGETS "")
+foreach(p echo kv)
+    set(PROTO_FILE ${PROTO_DIR}/${p}.proto)
+    add_custom_command(
+        OUTPUT ${GEN_DIR}/${p}.pb.cc ${GEN_DIR}/${p}.pb.h
+        COMMAND ${Protobuf_PROTOC_EXECUTABLE}
+            --cpp_out=${GEN_DIR}
+            -I${PROTO_DIR}
+            ${PROTO_FILE}
+        DEPENDS ${PROTO_FILE}
+        COMMENT "Generating C++ from ${p}.proto"
+    )
+    add_library(${p}_proto STATIC ${GEN_DIR}/${p}.pb.cc)
+    target_include_directories(${p}_proto PUBLIC
+        ${GEN_DIR}
+        ${Protobuf_INCLUDE_DIRS})
+    target_link_libraries(${p}_proto PUBLIC ${Protobuf_LIBRARIES})
+    list(APPEND PROTO_TARGETS ${p}_proto)
+endforeach()
 
 # ---------------------------------------------------------------------------
 # 3. 每个 example 一个可执行文件
@@ -69,6 +73,8 @@ find_library(CRYPTO_LIBRARY NAMES crypto
     PATHS ${BRPC_ROOT}/lib/x86_64-linux-gnu ${BRPC_ROOT}/lib /usr/lib/x86_64-linux-gnu)
 find_library(LEVELDB_LIBRARY NAMES leveldb
     PATHS ${BRPC_ROOT}/lib/x86_64-linux-gnu ${BRPC_ROOT}/lib /usr/lib/x86_64-linux-gnu)
+find_path(LEVELDB_INCLUDE_DIR NAMES leveldb/db.h
+    PATHS ${BRPC_ROOT}/include /usr/local/include /usr/include)
 find_library(SNAPPY_LIBRARY NAMES snappy
     PATHS ${BRPC_ROOT}/lib/x86_64-linux-gnu ${BRPC_ROOT}/lib /usr/lib/x86_64-linux-gnu)
 message(STATUS "SSL_LIBRARY = ${SSL_LIBRARY}")
@@ -77,7 +83,7 @@ message(STATUS "LEVELDB_LIBRARY = ${LEVELDB_LIBRARY}")
 message(STATUS "SNAPPY_LIBRARY = ${SNAPPY_LIBRARY}")
 
 set(COMMON_LIBS
-    echo_proto
+    ${PROTO_TARGETS}
     ${BRPC_LIBRARY}
     ${Protobuf_LIBRARIES}
     gflags
@@ -90,6 +96,7 @@ function(add_brpc_example name)
     add_executable(${name} examples/${name}/main.cpp)
     target_include_directories(${name} PRIVATE
         ${BRPC_INCLUDE_DIR}
+        ${LEVELDB_INCLUDE_DIR}
         ${GEN_DIR}
         ${Protobuf_INCLUDE_DIRS})
     target_link_libraries(${name} PRIVATE ${COMMON_LIBS})
@@ -107,6 +114,8 @@ add_brpc_example(iobuf_demo)
 add_brpc_example(selective_echo)
 add_brpc_example(backup_request)
 add_brpc_example(load_balancing)
+add_brpc_example(kv_server)
+add_brpc_example(kv_client)
 
 # ---------------------------------------------------------------------------
 # 4. 构建日志：把配置信息写入 build_logs/
@@ -117,7 +126,7 @@ set(BUILD_LOG ${LOG_DIR}/build.log)
 
 add_custom_target(log_build_info ALL
     COMMAND ${CMAKE_COMMAND} -E echo
-        "[${CMAKE_BUILD_TYPE}] examples=8 brpc=${BRPC_LIBRARY}"
+        "[${CMAKE_BUILD_TYPE}] examples=10 brpc=${BRPC_LIBRARY}"
         >> ${BUILD_LOG}
     COMMENT "Append build info to ${BUILD_LOG}"
 )

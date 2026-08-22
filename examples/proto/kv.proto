@@ -1,0 +1,24 @@
+syntax = "proto3";
+option cc_generic_services = true;   // 必须！否则 protoc 3.x 不生成 Service/Stub
+package example;
+
+message KvGetRequest {
+  string key = 1;
+}
+message KvGetResponse {
+  string value = 1;
+  bool found = 2;    // 键不存在时为 false
+}
+message KvSetRequest {
+  string key = 1;
+  string value = 2;
+}
+message KvSetResponse {
+  bool ok = 1;
+}
+
+// leveldb 作为存储引擎的 KV 服务
+service KvService {
+  rpc Get(KvGetRequest) returns (KvGetResponse);
+  rpc Set(KvSetRequest) returns (KvSetResponse);
+}
