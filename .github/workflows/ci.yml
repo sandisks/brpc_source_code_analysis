@@ -1,0 +1,54 @@
+name: build-examples
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            cmake g++ curl \
+            libprotobuf-dev protobuf-compiler \
+            libgflags-dev \
+            libssl-dev zlib1g-dev \
+            libleveldb-dev libsnappy-dev
+
+      - name: Build brpc 1.17.0
+        run: |
+          set -e
+          mkdir -p /tmp/brpc_src && cd /tmp/brpc_src
+          curl -sL --retry 3 -o brpc.tar.gz \
+            https://github.com/apache/brpc/archive/refs/tags/1.17.0.tar.gz
+          tar xzf brpc.tar.gz
+          cd brpc-1.17.0
+          mkdir -p build && cd build
+          cmake -DCMAKE_BUILD_TYPE=Release \
+                -DCMAKE_INSTALL_PREFIX=/tmp/brpc_ci/usr ..
+          make -j"$(nproc)"
+          make install
+
+      - name: Configure & build examples
+        run: |
+          cmake -S . -B build \
+            -DBRPC_ROOT=/tmp/brpc_ci/usr \
+            -DCMAKE_BUILD_TYPE=Release
+          cmake --build build -j"$(nproc)"
+
+      - name: Run examples
+        run: |
+          BRPC_ROOT=/tmp/brpc_ci/usr bash scripts/run_examples.sh
+
+      - name: Show run log
+        if: always()
+        run: |
+          tail -n 20 build_logs/run.log || true
