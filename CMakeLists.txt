@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.10)
-project(brpc_examples LANGUAGES CXX)
+project(brpc_examples LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # ---------------------------------------------------------------------------
-# 0. 依赖前缀：默认 /tmp/brpc_local/usr（本仓库构建脚本安装 brpc 的位置）
+# 0. 依赖前缀：优先 /usr/local（install_system.sh 安装位置），否则 /tmp 前缀
 #    可用 -DBRPC_ROOT=<前缀> 覆盖
 # ---------------------------------------------------------------------------
 if(NOT DEFINED BRPC_ROOT)
-    set(BRPC_ROOT "/tmp/brpc_local/usr")
+    if(EXISTS "/usr/local/include/brpc/channel.h")
+        set(BRPC_ROOT "/usr/local")
+    else()
+        set(BRPC_ROOT "/tmp/brpc_local/usr")
+    endif()
 endif()
 set(CMAKE_PREFIX_PATH ${BRPC_ROOT} ${CMAKE_PREFIX_PATH})
 

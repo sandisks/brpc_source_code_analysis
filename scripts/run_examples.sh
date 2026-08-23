@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# 运行所有 examples，并把 stdout/stderr 追加到 build_logs/run.log
+# 运行所有 examples，并把 stdout/stderr 追加到 logs/run.log
 set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BUILD="$ROOT/build"
-LOG_DIR="$ROOT/build_logs"
+LOG_DIR="$ROOT/logs"
 LOG="$LOG_DIR/run.log"
 mkdir -p "$LOG_DIR"
 
-PREFIX="${BRPC_ROOT:-/tmp/brpc_local/usr}"
+PREFIX="${BRPC_ROOT:-/usr/local}"
 export LD_LIBRARY_PATH="${PREFIX}/lib/x86_64-linux-gnu:${LD_LIBRARY_PATH:-}"
 
 echo "" >> "$LOG"

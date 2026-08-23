@@ -1,3 +1,6 @@
 [Release] examples=8 brpc=/tmp/brpc_local/usr/lib/libbrpc.a
 [Release] examples=10 brpc=/tmp/brpc_local/usr/lib/libbrpc.a
 [Release] examples=10 brpc=/tmp/brpc_local/usr/lib/libbrpc.a
+[Debug] examples=10 brpc=/usr/local/lib/libbrpc.a
+[Release] examples=10 brpc=/tmp/brpc_local/usr/lib/libbrpc.a
+[Release] examples=10 brpc=/usr/local/lib/libbrpc.a

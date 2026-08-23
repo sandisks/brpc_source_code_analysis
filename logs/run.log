@@ -1,0 +1,82 @@
+
+========== 2026-08-23 11:39:26 run_examples ==========
+[run] start echo_server on 8000
+---------- [bthread_demo]  ----------
+I0823 11:39:28.948289 178868 4294968579 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bthread_demo/main.cpp:13 worker] bthread id=4 shared=4
+I0823 11:39:28.948404 178868 4294968577 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bthread_demo/main.cpp:13 worker] bthread id=2 shared=6
+I0823 11:39:28.948435 178868 4294968576 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bthread_demo/main.cpp:13 worker] bthread id=1 shared=7
+I0823 11:39:28.948466 178868 4294968578 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bthread_demo/main.cpp:13 worker] bthread id=3 shared=10
+I0823 11:39:28.948513 178859     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bthread_demo/main.cpp:33 main] all bthreads joined, g_shared=10
+---------- [bthread_demo] exit=0 ----------
+---------- [iobuf_demo]  ----------
+I0823 11:39:28.960182 178879     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/iobuf_demo/main.cpp:12 main] buf=hello world length=11
+I0823 11:39:28.960451 178879     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/iobuf_demo/main.cpp:17 main] cut 5 bytes: "hello"
+I0823 11:39:28.960457 178879     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/iobuf_demo/main.cpp:18 main] remaining= world
+I0823 11:39:28.960461 178879     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/iobuf_demo/main.cpp:24 main] after append another IOBuf:  world + tail
+I0823 11:39:28.960464 178879     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/iobuf_demo/main.cpp:29 main] piece= worl rest=d + tail
+---------- [iobuf_demo] exit=0 ----------
+---------- [bvar_demo]  ----------
+I0823 11:39:29.023835 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=0 count=1 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.104063 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=1 count=2 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.214261 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=2 count=3 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.354583 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=3 count=4 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.524830 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=4 count=5 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.575042 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=5 count=6 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.655249 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=6 count=7 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.765441 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=7 count=8 qps=113 latency_avg=0us p99=0us
+I0823 11:39:29.905631 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=8 count=9 qps=113 latency_avg=0us p99=0us
+I0823 11:39:30.075803 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=9 count=10 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.126001 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=10 count=11 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.206178 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=11 count=12 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.316358 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=12 count=13 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.456566 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=13 count=14 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.626865 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=14 count=15 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.677146 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=15 count=16 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.757361 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=16 count=17 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:30.867601 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=17 count=18 qps=9 latency_avg=103442us p99=0us
+I0823 11:39:31.007874 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=18 count=19 qps=9 latency_avg=105112us p99=170107us
+I0823 11:39:31.178110 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:21 main] iter=19 count=20 qps=9 latency_avg=105112us p99=170107us
+I0823 11:39:31.178312 178890     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/bvar_demo/main.cpp:27 main] Done. 配合 Server 时打开 http://127.0.0.1:8000/vars 可查看
+---------- [bvar_demo] exit=0 ----------
+---------- [echo_client] --target=127.0.0.1:8000 --count=3 ----------
+I0823 11:39:31.204408 179294     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:52 main] [sync] got="hello-0" cost=3952us
+I0823 11:39:31.204857 179294     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:52 main] [sync] got="hello-1" cost=348us
+I0823 11:39:31.205163 179294     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:52 main] [sync] got="hello-2" cost=277us
+I0823 11:39:31.205794 179304 4294968833 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:22 OnEchoDone] [async] got="async-2"
+I0823 11:39:31.205817 179303 8589935105 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:22 OnEchoDone] [async] got="async-1"
+I0823 11:39:31.205862 179302 4294968834 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:22 OnEchoDone] [async] got="async-0"
+I0823 11:39:31.705358 179294     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/echo_client/main.cpp:70 main] client done.
+---------- [echo_client] exit=0 ----------
+---------- [backup_request] --target=list://127.0.0.1:8000,127.0.0.1:8003 --count=5 ----------
+I0823 11:39:33.729513 179831     0 /tmp/brpc_src/brpc-1.17.0/src/brpc/details/naming_service_thread.cpp:203 ResetServers] brpc::policy::ListNamingService("127.0.0.1:8000,127.0.0.1:8003"): added 2
+I0823 11:39:33.733126 179831     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/backup_request/main.cpp:39 main] [0] got="backup-0" cost=3461us (backup_request_ms=2)
+I0823 11:39:33.733580 179831     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/backup_request/main.cpp:39 main] [1] got="backup-1" cost=393us (backup_request_ms=2)
+I0823 11:39:33.733932 179831     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/backup_request/main.cpp:39 main] [2] got="backup-2" cost=317us (backup_request_ms=2)
+I0823 11:39:33.734198 179831     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/backup_request/main.cpp:39 main] [3] got="backup-3" cost=218us (backup_request_ms=2)
+I0823 11:39:33.734487 179831     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/backup_request/main.cpp:39 main] [4] got="backup-4" cost=253us (backup_request_ms=2)
+---------- [backup_request] exit=0 ----------
+---------- [selective_echo] --port1=8000 --port2=8002 --count=3 ----------
+I0823 11:39:35.759270 180441     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/selective_echo/main.cpp:52 main] [selective] got="selective-0" from=127.0.0.1:8000
+I0823 11:39:35.761403 180441     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/selective_echo/main.cpp:52 main] [selective] got="selective-1" from=127.0.0.1:8002
+I0823 11:39:35.761769 180441     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/selective_echo/main.cpp:52 main] [selective] got="selective-2" from=127.0.0.1:8000
+---------- [selective_echo] exit=0 ----------
+---------- [load_balancing] --target=list://127.0.0.1:8000,127.0.0.1:8006 --count=8 ----------
+I0823 11:39:37.785530 180947     0 /tmp/brpc_src/brpc-1.17.0/src/brpc/details/naming_service_thread.cpp:203 ResetServers] brpc::policy::ListNamingService("127.0.0.1:8000,127.0.0.1:8006"): added 2
+I0823 11:39:37.787416 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [0] got="lb-0" routed_to=127.0.0.1:8000
+I0823 11:39:37.789127 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [1] got="lb-1" routed_to=127.0.0.1:8006
+I0823 11:39:37.789420 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [2] got="lb-2" routed_to=127.0.0.1:8000
+I0823 11:39:37.789686 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [3] got="lb-3" routed_to=127.0.0.1:8000
+I0823 11:39:37.789963 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [4] got="lb-4" routed_to=127.0.0.1:8000
+I0823 11:39:37.790180 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [5] got="lb-5" routed_to=127.0.0.1:8000
+I0823 11:39:37.790406 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [6] got="lb-6" routed_to=127.0.0.1:8000
+I0823 11:39:37.790620 180947     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/load_balancing/main.cpp:35 main] [7] got="lb-7" routed_to=127.0.0.1:8000
+---------- [load_balancing] exit=0 ----------
+---------- [kv_client] --target=127.0.0.1:8004 ----------
+I0823 11:39:39.818256 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:39 main] Set greeting => hello from brpc+leveldb (ok=1)
+I0823 11:39:39.818686 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:39 main] Set answer => 42 (ok=1)
+I0823 11:39:39.819024 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:54 main] Get greeting => found=1 value="hello from brpc+leveldb"
+I0823 11:39:39.819361 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:54 main] Get answer => found=1 value="42"
+I0823 11:39:39.819744 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:69 main] Get not-exist => found=0
+I0823 11:39:39.819767 181606     0 /home/wdidada/git/cpp/brpc_source_code_analysis/examples/kv_client/main.cpp:73 main] kv_client done.
+---------- [kv_client] exit=0 ----------
+[run] all done. log=/home/wdidada/git/cpp/brpc_source_code_analysis/logs/run.log
