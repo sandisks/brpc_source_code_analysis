@@ -1,0 +1,3 @@
+[submodule "butil_cmake_lib/src/butil/third_party"]
+	path = butil_cmake_lib/src/butil/third_party
+	url = ../third_party_butil.git

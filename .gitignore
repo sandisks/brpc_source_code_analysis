@@ -14,3 +14,6 @@ compile_commands.json
 .idea
 *.iml
 cmake-build-*/
+# CPack 打包产物
+_CPack_Packages/
+*.deb
